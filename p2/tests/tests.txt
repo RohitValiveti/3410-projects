@@ -1,0 +1,735 @@
+## desc = add, addi tests
+## cycles = 40
+#------------------START VALUES---------
+## start[1] = 1
+## start[2] = 2
+## start[3] = 0xffffffff
+## start[14] = 10
+## start[15] = 20
+## start[16] = 30
+## start[17] = 40
+## start[18] = 50
+## start[19] = 60
+## start[20] = 70
+## start[21] = 80
+## start[22] = 90
+## start[23] = 100
+## start[24] = 110
+## start[31] = -1
+## start[30] = -2
+## start[29] = -100
+#------------------END VALUES------------
+## expect[1] = 1
+## expect[2] = 2
+## expect[3] = 0xffffffff
+## expect[5] = 1
+## expect[6] = 0xfffffffe
+## expect[7] = 0
+## expect[8] = 1
+## expect[10] = 0x00000118
+## expect[11] = -3
+## expect[12] = -102
+## expect[13] = -200
+## expect[14] = 10
+## expect[15] = 0x00000028
+## expect[16] = 0x0000006e
+## expect[17] = 0x000000a0
+## expect[18] = 0x000000dc
+## expect[19] = 0x00000050
+## expect[20] = 0x000000a0
+## expect[21] = 0x000000fa
+## expect[22] = 0x0000015e
+## expect[23] = 0x000001cc
+## expect[24] = 0x000001d6
+## expect[29] = -100
+## expect[30] = -2
+## expect[31] = -1
+#------------------ASSEMBLY--------------
+
+# Overflow cases
+addi x4, x3, 1
+addi x5, x3, 2
+add x6, x3, x3
+add x7, x3, x1
+add x8, x3, x2
+#0 value adds
+add x9, x10, x11
+addi x10, x10, 0
+# negative adds
+add x11, x31, x30
+add x12, x30, x29
+addi x13, x29, -100
+#Random tests
+add x15, x14, x15
+add x16, x15, x16
+add x17, x16, x17
+add x18, x17, x18
+add x19, x18, x19
+add x10, x19, x20
+add x21, x20, x21
+add x22, x21, x22
+add x23, x22, x23
+add x24, x23, x24
+
+addi x15, x15, 10
+addi x16, x16, 10
+addi x16, x17, 10
+addi x17, x18, 10
+addi x18, x19, 10
+addi x19, x20, 10
+addi x20, x21, 10
+addi x21, x22, 10
+addi x22, x23, 10
+addi x23, x24, 10
+addi x24, x23, 10
+## desc = and tests
+## cycles =20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = 0xffffffff
+## expect[4] = 1
+## expect[5] = 0x7fffffff
+## expect[6] = 0x80000000
+## expect[7] = 0xffffffff
+## expect[8] = 1
+## expect[9] = 0
+## expect[10] = 0x7fffffff
+## expect[11] = 1
+## expect[12] = 0
+## expect[13] = 0x80000000
+## expect[14] = 0
+## expect[15] = 0x7fffffff
+## expect[16] = 0x80000000
+## expect[17] = 1
+## expect[18] = 1
+## expect[19] = 0
+## expect[20] = 1
+## expect[24] = 0
+## expect[25] = 0x00000020
+## expect[26] = 0x00000064
+## expect[27] = 0
+## expect[28] = 0x00000020
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values (and), and 0,1,-1
+
+and x5, x1, x1
+and x6, x2, x2
+and x7, x3, x3
+and x8, x4, x4
+
+and x9, x1, x2
+and x10, x1, x3
+and x11, x1, x4
+
+and x12, x2, x1
+and x13, x2, x3
+and x14, x2, x4
+
+and x15, x3, x1
+and x16, x3, x2
+and x17, x3, x4
+
+and x18, x4, x1
+and x19, x4, x2
+and x20, x4, x3
+
+#Random Tests (and)
+and x28, x31, x30
+and x27, x31, x29
+and x26, x31, x31
+and x25, x28, x31
+and x24, x29, x31 ## desc = and tests
+## cycles =20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+
+##start[29] = 30
+##start[30] = 20
+##start[31] = 10
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = 0xffffffff
+## expect[4] = 1
+## expect[5] = 1
+## expect[7] = 1
+## expect[8] = 1
+## expect[13] = 0x000007ff
+## expect[15] = 0x000007ff
+## expect[16] = 1
+## expect[17] = 0x7ffff800
+## expect[18] = 0x80000000
+## expect[19] = 0xfffff800
+
+##expect[24] = 4
+##expect[26] = 0x00000014
+##expect[27] = 4
+
+##expect[29] = 30
+##expect[30] = 20
+##expect[31] = 10
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values (andi), and 0,1,-1
+
+andi x5, x1, 1
+andi x6, x2, 1
+andi x7, x3, 1
+andi x8, x4, 1
+
+
+andi x9, x1, 0
+andi x10, x2, 0
+andi x11, x3, 0
+andi x12, x4, 0
+
+andi x13, x1, 2047
+andi x14, x2, 2047
+andi x15, x3, 2047
+andi x16, x4, 2047
+
+andi x17, x1, -2048
+andi x18, x2, -2048
+andi x19, x3, -2048
+andi x20, x4, -2048
+
+#Random Tests (andi)
+andi x28, x31, 20
+andi x27, x30,100
+andi x26, x29, 500
+andi x25, x31, 2000
+andi x24, x30, 6## desc = lb and sb tests
+## cycles = 15
+#------------------START VALUES---------
+## start[1] = 1
+## start[2] = -1
+## start[3] = 31
+## start[4] = -32
+## start[5] = 100
+## start[6] = 1000000000
+#------------------END VALUES------------
+## expect[1] = 1
+## expect[2] = -1
+## expect[3] = 31
+## expect[4] = -32
+## expect[5] = 0x00000064
+## expect[6] = 0x3b9aca00
+## expect[7] = 0x00000064
+## expect[8] = 0x00000064
+## expect[9] = 0x00000064
+## expect[10] = 0x00000064
+## expect[11] = 0x00000064
+## expect[12] = 0x00000064
+## expect[13] = 0x00000064
+#------------------ASSEMBLY--------------
+#Edge/Random Cases all possible bytes covered and max values for immediate:
+sb x5, 8(x3)
+lb x7, 8(x3)
+sb x5, 12(x3)
+lb x8, 12(x3)
+sb x5, 12(x3)
+lb x9, 12(x3)
+sb x5, 24(x3)
+lb x10, 24(x3)
+sb x5, 32(x3)
+lb x11, 32(x3)
+sb x5, 34(x3)
+lb x12, 34(x3)
+sb x5, 36(x3)
+lb x13, 36(x3)## desc = load upper immediate (lui) tests
+## cycles = 15
+#------------------END VALUES------------
+## expect[2] = 4096
+## expect[3] = -4096
+## expect[4] = 0x7ffff000
+## expect[5] = 0x80000000
+## expect[6] = 0x00b58000
+## expect[7] = 0x0162e000
+## expect[8] = 0x0021f000
+## expect[9] = 0x00062000
+## expect[10] = 0x002fd000
+## expect[11] = 0x00159000
+## expect[12] = 0x00141000
+## expect[13] = 0x00002000
+## expect[14] = 0x00005000
+#------------------ASSEMBLY--------------
+#Edge Cases: lui max/min 20bit numbers all combos and 0,1,-1
+lui x1, 0
+lui x2, 1
+lui x3, -1
+lui x4, 524287
+lui x5, -524288
+#Random Cases
+lui x6, 2904
+lui x7, 5678
+lui x8, 543
+lui x9, 98
+lui x10, 765
+lui x11, 345
+lui x12, 321
+lui x13, 2
+lui x14, 5## desc = lw and sw tests
+## cycles = 20
+#------------------START VALUES---------
+## start[1] = 1
+## start[2] = -1
+## start[3] = 31
+## start[4] = -32
+## start[5] = 77
+#------------------END VALUES------------
+## expect[1] = 1
+## expect[2] = -1
+## expect[3] = 31
+## expect[4] = -32
+## expect[5] = 77
+## expect[6] = 77
+## expect[7] = 77
+## expect[8] = 77
+## expect[9] = 77
+## expect[10] = 77
+## expect[11] = 77
+## expect[12] = 77
+## expect[13] = 77
+## expect[14] = 77
+## expect[15] = 77
+#------------------ASSEMBLY--------------
+# Edge Cases: Max/min offset values and 0,1
+
+sw x5, 0(x0)
+sw x5, 0(x1)
+sw x5, 0(x2)
+sw x5, 0(x3)
+sw x5, 0(x4)
+lw x6, 0(x0)
+lw x7, 0(x1)
+lw x8, 0(x2)
+lw x9, 0(x3)
+lw x10, 0(x4)
+
+sw x5, 1(x0)
+sw x5, 1(x1)
+sw x5, 1(x2)
+sw x5, 1(x3)
+sw x5, 1(x4)
+lw x11, 1(x0)
+lw x12, 1(x1)
+lw x13, 1(x2)
+lw x14, 1(x3)
+lw x15, 1(x4)
+
+sw x5, 32(x0)
+sw x5, 32(x1)
+sw x5, 32(x2)
+sw x5, 32(x3)
+sw x5, 32(x4)
+lw x16, 32(x0)
+lw x17, 32(x1)
+lw x18, 32(x2)
+lw x19, 32(x3)
+lw x20, 32(x4)
+
+#Random tests:
+sw x5, 18(x0)
+sw x5, 19(x1)
+sw x5, 22(x2)
+sw x5, 8(x3)
+sw x5, 7(x4)
+lw x21, 18(x0)
+lw x22, 19(x1)
+lw x23, 22(x2)
+lw x24, 8(x3)
+lw x25, 7(x4)## desc = or tests
+## cycles =20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = -1
+## expect[4] = 1
+## expect[9] = -1
+## expect[8] = 1
+## expect[7] = 0xffffffff
+## expect[6] = 0x80000000
+## expect[5] = 0x7fffffff
+## expect[10] = 0xffffffff
+## expect[11] = 0x7fffffff
+## expect[12] = 0xffffffff
+## expect[13] = 0xffffffff
+## expect[14] = 0x80000001
+## expect[15] = 0xffffffff
+## expect[16] = 0xffffffff
+## expect[17] = 0xffffffff
+## expect[18] = 0x7fffffff
+## expect[19] = -2147483647
+## expect[20] = 0xffffffff
+## expect[24] = 0x0000007d
+## expect[25] = 0x00000076
+## expect[26] = 0x00000064
+## expect[27] = 0x0000007d
+## expect[28] = 0x00000076
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values and 0,1,-1
+
+or x5, x1, x1
+or x6, x2, x2
+or x7, x3, x3
+or x8, x4, x4
+
+or x9, x1, x2
+or x10, x1, x3
+or x11, x1, x4
+
+or x12, x2, x1
+or x13, x2, x3
+or x14, x2, x4
+
+or x15, x3, x1
+or x16, x3, x2
+or x17, x3, x4
+
+or x18, x4, x1
+or x19, x4, x2
+or x20, x4, x3
+
+#Random Tests
+or x28, x31, x30
+or x27, x31, x29
+or x26, x31, x31
+or x25, x28, x31
+or x24, x29, x31 
+## desc = shift left logical tests
+## cycles = 20
+#------------------START VALUES---------
+## start[1] = 31
+## start[2] = -32
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 31
+## expect[2] = -32
+## expect[3] = -1
+## expect[4] = 1
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+## expect[10] = 0x0000001f
+## expect[11] = 0x80000000
+## expect[12] = 0x0000001f
+## expect[13] = 0x80000000
+## expect[14] = 0x0000003e
+## expect[15] = 0xffffffe0
+## expect[17] = 0xffffffe0
+## expect[19] = 0xffffffc0
+## expect[20] = 0xffffffff
+## expect[21] = 0x80000000
+## expect[22] = 0xffffffff
+## expect[23] = 0x80000000
+## expect[24] = 0xfffffffe
+## expect[25] = 1
+## expect[29] = 0x00000019
+#------------------ASSEMBLY--------------
+#Edge Cases: All combinations of max/min number being shifted by max/min shift values and 0,1,-1
+
+sll x5, x0, x0
+sll x6, x0, x1
+sll x7, x0, x2
+sll x8, x0, x3
+sll  x9, x0, x4
+
+sll x10, x1, x0
+sll x11, x1, x1
+sll x12, x1, x2
+sll x13, x1, x3
+sll  x14, x1, x4
+
+sll x15, x2, x0
+sll x16, x2, x1
+sll x17, x2, x2
+sll x18, x2, x3
+sll  x19, x2, x4
+
+sll x20, x3, x0
+sll x21, x3, x1
+sll x22, x3, x2
+sll x23, x3, x3
+sll  x24, x3, x4
+
+sll x25, x4, x0
+sll x26, x4, x1
+sll x27, x4, x2
+sll x28, x4, x3
+sll  x29, x4, x4## desc = set less than tests
+## cycles = 20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = -1
+## expect[4] = 1
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+## expect[10] = 1
+## expect[11] = 1
+## expect[13] = 1
+## expect[14] = 1
+## expect[15] = 1
+## expect[16] = 1
+## expect[19] = 1
+## expect[21] = 1
+#------------------ASSEMBLY--------------
+#Edge Cases: All combinations of max/min number being compared by max/min shift values and 0,1,-1
+# Random: Cases also exhaust all possible combination
+slt x5, x1, x0
+slt x6, x1, x1
+slt x7, x1, x2
+slt x8, x1, x3
+slt x9, x1, x4
+
+slt x10, x2, x0
+slt x11, x2, x1
+slt x12, x2, x2
+slt x13, x2, x3
+slt x14, x2, x4
+
+slt x15, x3, x0
+slt x16, x3, x1
+slt x17, x3, x2
+slt x18, x3, x3
+slt x19, x3, x4
+
+slt x20, x4, x0
+slt x21, x4, x1
+slt x22, x4, x2
+slt x23, x4, x3
+slt x24, x4, x4
+
+slt x25, x0, x0
+slt x26, x0, x1
+slt x27, x0, x2
+slt x28, x0, x3
+slt x29, x0, x4## desc = shift right arithmetic tests
+## cycles = 20
+#------------------START VALUES---------
+## start[1] = 31
+## start[2] = -32
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 31
+## expect[2] = -32
+## expect[3] = -1
+## expect[4] = 1
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+## expect[10] = 0x0000001f
+## expect[12] = 0x0000001f
+## expect[14] = 0x0000000f
+## expect[15] = 0xffffffe0
+## expect[16] = 0xffffffff
+## expect[17] = 0xffffffe0
+## expect[18] = 0xffffffff
+## expect[19] = 0xfffffff0
+## expect[20] = 0xffffffff
+## expect[21] = 0xffffffff
+## expect[22] = 0xffffffff
+## expect[23] = 0xffffffff
+## expect[24] = 0xffffffff
+## expect[25] = 1
+## expect[29] = 0x00000019
+#------------------ASSEMBLY--------------
+#Edge Cases: All combinations of max/min number being shifted by max/min shift values and 0,1,-1
+sra x5, x0, x0
+sra x6, x0, x1
+sra x7, x0, x2
+sra x8, x0, x3
+sra  x9, x0, x4
+
+sra x10, x1, x0
+sra x11, x1, x1
+sra x12, x1, x2
+sra x13, x1, x3
+sra  x14, x1, x4
+
+sra x15, x2, x0
+sra x16, x2, x1
+sra x17, x2, x2
+sra x18, x2, x3
+sra  x19, x2, x4
+
+sra x20, x3, x0
+sra x21, x3, x1
+sra x22, x3, x2
+sra x23, x3, x3
+sra  x24, x3, x4
+
+sra x25, x4, x0
+sra x26, x4, x1
+sra x27, x4, x2
+sra x28, x4, x3
+sra  x29, x4, x4## desc = subtraction tests
+## cycles =30
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = -1
+## expect[4] = 1
+## expect[9] = -1
+## expect[10] = 0x80000000
+## expect[11] = 0x7FFFFFFE
+## expect[12] = 1
+## expect[13] = 0x80000001
+## expect[14] = 0x7FFFFFFF
+## expect[15] = -2147483648
+## expect[16] = 0x7fffffff
+## expect[17] = -2
+## expect[18] = -2147483646
+## expect[19] = -2147483647
+## expect[20] = 2
+## expect[24] = -75
+## expect[25] = -50
+## expect[27] = 75
+## expect[28] = 50
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values
+
+sub x5, x1, x1
+sub x6, x2, x2
+sub x7, x3, x3
+sub x8, x4, x4
+
+sub x9, x1, x2
+sub x10, x1, x3
+sub x11, x1, x4
+
+sub x12, x2, x1
+sub x13, x2, x3
+sub x14, x2, x4
+
+sub x15, x3, x1
+sub x16, x3, x2
+sub x17, x3, x4
+
+sub x18, x4, x1
+sub x19, x4, x2
+sub x20, x4, x3
+
+#Random Tests
+sub x28, x31, x30
+sub x27, x31, x29
+sub x26, x31, x31
+sub x25, x28, x31
+sub x24, x29, x31 
+## desc = xor tests
+## cycles =20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = -1
+## expect[4] = 1
+## expect[9] = -1
+## expect[10] = 0x80000000
+## expect[11] = 0x7ffffffe
+## expect[12] = 0xffffffff
+## expect[13] = 0x7fffffff
+## expect[14] = 0x80000001
+## expect[15] = 0x80000000
+## expect[16] = 0x7fffffff
+## expect[17] = 0xfffffffe
+## expect[18] = 0x7ffffffe
+## expect[19] = -2147483647
+## expect[20] = 0xfffffffe
+## expect[24] = 0x0000007d
+## expect[25] = 0x00000032
+## expect[27] = 0x0000007d
+## expect[28] = 0x00000056
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values
+
+xor x5, x1, x1
+xor x6, x2, x2
+xor x7, x3, x3
+xor x8, x4, x4
+
+xor x9, x1, x2
+xor x10, x1, x3
+xor x11, x1, x4
+
+xor x12, x2, x1
+xor x13, x2, x3
+xor x14, x2, x4
+
+xor x15, x3, x1
+xor x16, x3, x2
+xor x17, x3, x4
+
+xor x18, x4, x1
+xor x19, x4, x2
+xor x20, x4, x3
+
+#Random Tests
+xor x28, x31, x30
+xor x27, x31, x29
+xor x26, x31, x31
+xor x25, x28, x31
+xor x24, x29, x31 

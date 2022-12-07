@@ -1,0 +1,69 @@
+## desc = and tests
+## cycles =20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = 0xffffffff
+## expect[4] = 1
+## expect[5] = 0x7fffffff
+## expect[6] = 0x80000000
+## expect[7] = 0xffffffff
+## expect[8] = 1
+## expect[9] = 0
+## expect[10] = 0x7fffffff
+## expect[11] = 1
+## expect[12] = 0
+## expect[13] = 0x80000000
+## expect[14] = 0
+## expect[15] = 0x7fffffff
+## expect[16] = 0x80000000
+## expect[17] = 1
+## expect[18] = 1
+## expect[19] = 0
+## expect[20] = 1
+## expect[24] = 0
+## expect[25] = 0x00000020
+## expect[26] = 0x00000064
+## expect[27] = 0
+## expect[28] = 0x00000020
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values (and), and 0,1,-1
+
+and x5, x1, x1
+and x6, x2, x2
+and x7, x3, x3
+and x8, x4, x4
+
+and x9, x1, x2
+and x10, x1, x3
+and x11, x1, x4
+
+and x12, x2, x1
+and x13, x2, x3
+and x14, x2, x4
+
+and x15, x3, x1
+and x16, x3, x2
+and x17, x3, x4
+
+and x18, x4, x1
+and x19, x4, x2
+and x20, x4, x3
+
+#Random Tests (and)
+and x28, x31, x30
+and x27, x31, x29
+and x26, x31, x31
+and x25, x28, x31
+and x24, x29, x31 

@@ -1,0 +1,63 @@
+## desc = and tests
+## cycles =20
+#------------------START VALUES---------
+## start[1] = 0x7fffffff
+## start[2] = 0x80000000
+## start[3] = -1
+## start[4] = 1
+
+##start[29] = 30
+##start[30] = 20
+##start[31] = 10
+#------------------END VALUES------------
+## expect[1] = 0x7fffffff
+## expect[2] = 0x80000000
+## expect[3] = 0xffffffff
+## expect[4] = 1
+## expect[5] = 1
+## expect[7] = 1
+## expect[8] = 1
+## expect[13] = 0x000007ff
+## expect[15] = 0x000007ff
+## expect[16] = 1
+## expect[17] = 0x7ffff800
+## expect[18] = 0x80000000
+## expect[19] = 0xfffff800
+
+##expect[24] = 4
+##expect[26] = 0x00000014
+##expect[27] = 4
+
+##expect[29] = 30
+##expect[30] = 20
+##expect[31] = 10
+#------------------ASSEMBLY--------------
+#Edge cases: Max/min values (andi), and 0,1,-1
+
+andi x5, x1, 1
+andi x6, x2, 1
+andi x7, x3, 1
+andi x8, x4, 1
+
+
+andi x9, x1, 0
+andi x10, x2, 0
+andi x11, x3, 0
+andi x12, x4, 0
+
+andi x13, x1, 2047
+andi x14, x2, 2047
+andi x15, x3, 2047
+andi x16, x4, 2047
+
+andi x17, x1, -2048
+andi x18, x2, -2048
+andi x19, x3, -2048
+andi x20, x4, -2048
+
+#Random Tests (andi)
+andi x28, x31, 20
+andi x27, x30,100
+andi x26, x29, 500
+andi x25, x31, 2000
+andi x24, x30, 6

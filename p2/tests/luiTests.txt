@@ -1,0 +1,33 @@
+## desc = load upper immediate (lui) tests
+## cycles = 15
+#------------------END VALUES------------
+## expect[2] = 4096
+## expect[3] = -4096
+## expect[4] = 0x7ffff000
+## expect[5] = 0x80000000
+## expect[6] = 0x00b58000
+## expect[7] = 0x0162e000
+## expect[8] = 0x0021f000
+## expect[9] = 0x00062000
+## expect[10] = 0x002fd000
+## expect[11] = 0x00159000
+## expect[12] = 0x00141000
+## expect[13] = 0x00002000
+## expect[14] = 0x00005000
+#------------------ASSEMBLY--------------
+#Edge Cases: lui max/min 20bit numbers all combos and 0,1,-1
+lui x1, 0
+lui x2, 1
+lui x3, -1
+lui x4, 524287
+lui x5, -524288
+#Random Cases
+lui x6, 2904
+lui x7, 5678
+lui x8, 543
+lui x9, 98
+lui x10, 765
+lui x11, 345
+lui x12, 321
+lui x13, 2
+lui x14, 5

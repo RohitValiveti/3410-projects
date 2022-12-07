@@ -1,0 +1,65 @@
+## desc = shift left logical tests
+## cycles = 20
+#------------------START VALUES---------
+## start[1] = 31
+## start[2] = -32
+## start[3] = -1
+## start[4] = 1
+## start[29] = 25
+## start[30] = 50
+## start[31] = 100
+#------------------END VALUES------------
+## expect[1] = 31
+## expect[2] = -32
+## expect[3] = -1
+## expect[4] = 1
+## expect[29] = 25
+## expect[30] = 50
+## expect[31] = 100
+## expect[10] = 0x0000001f
+## expect[11] = 0x80000000
+## expect[12] = 0x0000001f
+## expect[13] = 0x80000000
+## expect[14] = 0x0000003e
+## expect[15] = 0xffffffe0
+## expect[17] = 0xffffffe0
+## expect[19] = 0xffffffc0
+## expect[20] = 0xffffffff
+## expect[21] = 0x80000000
+## expect[22] = 0xffffffff
+## expect[23] = 0x80000000
+## expect[24] = 0xfffffffe
+## expect[25] = 1
+## expect[29] = 0x00000019
+#------------------ASSEMBLY--------------
+#Edge Cases: All combinations of max/min number being shifted by max/min shift values and 0,1,-1
+
+sll x5, x0, x0
+sll x6, x0, x1
+sll x7, x0, x2
+sll x8, x0, x3
+sll  x9, x0, x4
+
+sll x10, x1, x0
+sll x11, x1, x1
+sll x12, x1, x2
+sll x13, x1, x3
+sll  x14, x1, x4
+
+sll x15, x2, x0
+sll x16, x2, x1
+sll x17, x2, x2
+sll x18, x2, x3
+sll  x19, x2, x4
+
+sll x20, x3, x0
+sll x21, x3, x1
+sll x22, x3, x2
+sll x23, x3, x3
+sll  x24, x3, x4
+
+sll x25, x4, x0
+sll x26, x4, x1
+sll x27, x4, x2
+sll x28, x4, x3
+sll  x29, x4, x4

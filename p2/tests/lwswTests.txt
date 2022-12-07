@@ -1,0 +1,71 @@
+## desc = lw and sw tests
+## cycles = 20
+#------------------START VALUES---------
+## start[1] = 1
+## start[2] = -1
+## start[3] = 31
+## start[4] = -32
+## start[5] = 77
+#------------------END VALUES------------
+## expect[1] = 1
+## expect[2] = -1
+## expect[3] = 31
+## expect[4] = -32
+## expect[5] = 77
+## expect[6] = 77
+## expect[7] = 77
+## expect[8] = 77
+## expect[9] = 77
+## expect[10] = 77
+## expect[11] = 77
+## expect[12] = 77
+## expect[13] = 77
+## expect[14] = 77
+## expect[15] = 77
+#------------------ASSEMBLY--------------
+# Edge Cases: Max/min offset values and 0,1
+
+sw x5, 0(x0)
+sw x5, 0(x1)
+sw x5, 0(x2)
+sw x5, 0(x3)
+sw x5, 0(x4)
+lw x6, 0(x0)
+lw x7, 0(x1)
+lw x8, 0(x2)
+lw x9, 0(x3)
+lw x10, 0(x4)
+
+sw x5, 1(x0)
+sw x5, 1(x1)
+sw x5, 1(x2)
+sw x5, 1(x3)
+sw x5, 1(x4)
+lw x11, 1(x0)
+lw x12, 1(x1)
+lw x13, 1(x2)
+lw x14, 1(x3)
+lw x15, 1(x4)
+
+sw x5, 32(x0)
+sw x5, 32(x1)
+sw x5, 32(x2)
+sw x5, 32(x3)
+sw x5, 32(x4)
+lw x16, 32(x0)
+lw x17, 32(x1)
+lw x18, 32(x2)
+lw x19, 32(x3)
+lw x20, 32(x4)
+
+#Random tests:
+sw x5, 18(x0)
+sw x5, 19(x1)
+sw x5, 22(x2)
+sw x5, 8(x3)
+sw x5, 7(x4)
+lw x21, 18(x0)
+lw x22, 19(x1)
+lw x23, 22(x2)
+lw x24, 8(x3)
+lw x25, 7(x4)
